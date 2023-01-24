@@ -24,7 +24,7 @@ class Post(Base):
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
+
 
 class Follower(Base):
     __tablename__ = 'follower'
@@ -33,7 +33,7 @@ class Follower(Base):
     id = Column(Integer, primary_key=True)
     user_from_id = Column(Integer, ForeignKey('user.id'))
     user_to_id = Column(Integer, ForeignKey('user.id'))
-    # user_to = relationship(User)
+   
 
 
 class Comment(Base):
@@ -42,11 +42,9 @@ class Comment(Base):
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     comment_text = Column(String(250))
-    author_id = Column(Integer)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
+    author_id = Column(Integer, ForeignKey('user.id'))
     post_id = Column(Integer, ForeignKey('post.id'))
-    post = relationship(Post)
+    
     
     
 class Media(Base):
@@ -57,7 +55,6 @@ class Media(Base):
     type = Column(Enum)
     url = Column(Integer)
     post_id = Column(Integer, ForeignKey('post.id'))
-    post = relationship(Post)
     
 
     def to_dict(self):
